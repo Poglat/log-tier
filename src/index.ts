@@ -9,10 +9,11 @@ const rankSection = document.getElementById("rankImages")!
 const tierContainer = document.getElementById("tierContainer")!
 const challenger = document.getElementById("challenger")! as HTMLImageElement
 const incumbent = document.getElementById("incumbent")! as HTMLImageElement
+const octagon = document.getElementById("octagon")!
 
 const read_files: string[] = []
 
-let l: number, r: number;
+let l: number, r: number, m: number;
 
 fileInput.addEventListener('change', startTier)
 challenger.addEventListener('click', (event) => { stepSort(true) })
@@ -33,11 +34,10 @@ function startTier() {
         read_files.push(url)
     }
     // For visual consistency, start the list with the 2nd file
-    // in list a,b,c this displays [a] vs [b]
-    challenger.src = read_files.shift()!
-    incumbent.src = read_files[0]
-    tierContainer.appendChild(createImg(read_files.shift()!))
+    // >> in list a,b,c this displays [a] vs [b]
 
+    tierContainer.appendChild(createImg(read_files[1]))
+    read_files.splice(1, 1)
     resetSort()
 }
 
@@ -50,14 +50,21 @@ function createImg(src: string): HTMLImageElement {
 }
 
 function resetSort() {
+    if (!read_files.length) {
+        console.log("we done")
+        octagon.classList.add("hidden")
+        return
+    }
     l = 0
     r = tierContainer.childElementCount - 1
+    challenger.src = read_files.shift()!
+    m = (l + r) >> 1
+    incumbent.src = tierContainer.getElementsByTagName('img')[m].src
 }
 
 
 function stepSort(greater: boolean) {
     console.log("I AM STEWPPIPNG")
-    let m = (l + r) >> 1
 
     console.log(`l ${l} r ${r} m ${m}`)
 
@@ -74,12 +81,10 @@ function stepSort(greater: boolean) {
         let target = m + (greater ? 0 : 1)
         let newImg = createImg(challenger.src)
         tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
+
         resetSort()
+        return
     }
-}
-
-
-for (let x = 0; x < 20; x++) {
-    console.log(`${x}/2`)
-    console.log(x >> 1)
+    m = (l + r) >> 1
+    incumbent.src = tierContainer.getElementsByTagName('img')[m].src
 }
