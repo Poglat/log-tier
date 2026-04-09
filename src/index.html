@@ -2,15 +2,34 @@
 SPDX-License-Identifier: GPL-3.0-only
 Copyright (c) 2026 Poglat
 -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Tier</title>
-    <link rel="icon" href="./favicon.ico">
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
 
+<body>
+    <header>
+        <img id="logo" src="../assets/icon.svg">
+        <h1>Log Tier</h1>
+    </header>
+
+    <section id="imageSelection">
+        <label for="fileInput">Select Images to Rank</label>
+        <input id=fileInput type="file" accept="image/*" multiple>
+    </section>
+
+    <section id="rankImages" hidden>
+        <main id="tierContainer"></main>
+    </section>
+
+    <script src="../dist/index.js" defer></script>
 </body>
+
 </html>
