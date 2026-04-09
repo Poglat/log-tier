@@ -12,7 +12,11 @@ const incumbent = document.getElementById("incumbent")! as HTMLImageElement
 
 const read_files: string[] = []
 
+let l: number, r: number;
+
 fileInput.addEventListener('change', startTier)
+challenger.addEventListener('click', (event) => { stepSort(true) })
+incumbent.addEventListener('click', (event) => { stepSort(false) })
 
 function startTier() {
     if (!fileInput.files || fileInput.files.length == 1) {
@@ -33,6 +37,8 @@ function startTier() {
     challenger.src = read_files.shift()!
     incumbent.src = read_files[0]
     tierContainer.appendChild(createImg(read_files.shift()!))
+
+    resetSort()
 }
 
 
@@ -41,4 +47,39 @@ function createImg(src: string): HTMLImageElement {
     img.loading = "lazy"
     img.src = src;
     return img
+}
+
+function resetSort() {
+    l = 0
+    r = tierContainer.childElementCount - 1
+}
+
+
+function stepSort(greater: boolean) {
+    console.log("I AM STEWPPIPNG")
+    let m = (l + r) >> 1
+
+    console.log(`l ${l} r ${r} m ${m}`)
+
+    if (greater) {
+        r = m - 1
+    }
+    else {
+        l = m + 1
+    }
+
+    if (r < l) {
+        console.log("I AM FALLLINF")
+        //if greater >> m+1, else m-1
+        let target = m + (greater ? 0 : 1)
+        let newImg = createImg(challenger.src)
+        tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
+        resetSort()
+    }
+}
+
+
+for (let x = 0; x < 20; x++) {
+    console.log(`${x}/2`)
+    console.log(x >> 1)
 }
