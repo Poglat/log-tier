@@ -19,6 +19,7 @@ fileInput.addEventListener('change', startTier)
 challenger.addEventListener('click', (event) => { stepSort(true) })
 incumbent.addEventListener('click', (event) => { stepSort(false) })
 
+
 function startTier() {
     if (!fileInput.files || fileInput.files.length == 1) {
         alert("You must give atleast 2 images to sort")
@@ -28,14 +29,12 @@ function startTier() {
     inputSection.hidden = true
     rankSection.hidden = false
 
-    console.log(fileInput.files.length)
     for (let x = 0; x < fileInput.files.length; x++) {
         let url = URL.createObjectURL(fileInput.files[x])
         read_files.push(url)
     }
     // For visual consistency, start the list with the 2nd file
     // >> in list a,b,c this displays [a] vs [b]
-
     tierContainer.appendChild(createImg(read_files[1]))
     read_files.splice(1, 1)
     resetSort()
@@ -51,7 +50,6 @@ function createImg(src: string): HTMLImageElement {
 
 function resetSort() {
     if (!read_files.length) {
-        console.log("we done")
         octagon.classList.add("hidden")
         return
     }
@@ -64,10 +62,6 @@ function resetSort() {
 
 
 function stepSort(greater: boolean) {
-    console.log("I AM STEWPPIPNG")
-
-    console.log(`l ${l} r ${r} m ${m}`)
-
     if (greater) {
         r = m - 1
     }
@@ -76,8 +70,6 @@ function stepSort(greater: boolean) {
     }
 
     if (r < l) {
-        console.log("I AM FALLLINF")
-        //if greater >> m+1, else m-1
         let target = m + (greater ? 0 : 1)
         let newImg = createImg(challenger.src)
         tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
