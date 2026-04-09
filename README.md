@@ -26,7 +26,7 @@ UI is minimal, as the core funcionality is still being worked on
     - Manually change size of, and amount of tiers, eg. 4 tiers with 25% each rather than a normal distribution of 6
 
 - [ ] Prettification
-    - 
+    - Working on the UI, and finshing most development
 
 ## Building from source
 
