@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="icon.svg" width="100">
+    <img src="assets/icon.svg" width="100">
     <h1>Log Tier</h1>
 </div>
 
@@ -29,4 +29,4 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 All Log Tier source code is licensed underneath the [GPL-3.0 only](LICENSES/gpl-3.0.txt).
 
-The visual assets [favicon.ico](src/favicon.ico) and [icon.svg](icon.svg) are marked [CC0 1.0](LICENSES/cc0-1.0.txt)
+The visual assets [favicon.ico](src/favicon.ico) and [icon.svg](assets/icon.svg) are marked [CC0 1.0](LICENSES/cc0-1.0.txt)
