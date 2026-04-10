@@ -5,13 +5,13 @@
 
 Log Tier is a free, open source program made to make large tier lists quickly. 
 
-Rather than ranking each item in a Tier List one by one, Log Tier uses a Binary Search algorithm to find the place of elements in *log*arithmic time, which makes large tier lists significantly easier to manage.
+Log Tier uses a Binary Search algorithm, comparing against select individual items rather than an entire list; finding the correct place of elements in *log*arithmic time, which makes large tier lists significantly easier to manage.
 
 ## Status 
 
 Log Tier is in early development, and changes are frequent
 
-Currently you can order a set of images, but there are no distinct tiers
+Currently ranked images are automatically split into 6 tiers in an approximately normal distribution
 
 UI is minimal, as the core funcionality is still being worked on
 
@@ -19,7 +19,7 @@ UI is minimal, as the core funcionality is still being worked on
 
 - [x] Order one tier
 
-- [ ] 6 separate tiers
+- [x] 6 separate tiers
     - Create an approximately normal distribution across 6 points
 
 - [ ] N Tiers
@@ -58,4 +58,4 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 All Log Tier source code is licensed underneath the [GPL-3.0 only](LICENSE).
 
-The visual assets [favicon.ico](src/favicon.ico), and [icon.svg](assets/icon.svg) are marked [CC0 1.0](LICENSES/cc0-1.0.txt)
+The visual assets [favicon.ico](src/favicon.ico) and [icon.svg](src/assets/icon.svg) are marked [CC0 1.0](LICENSES/cc0-1.0.txt)
