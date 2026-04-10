@@ -12,8 +12,8 @@ const incumbent = document.getElementById("incumbent")! as HTMLImageElement
 const octagon = document.getElementById("octagon")!
 
 const read_files: string[] = []
-
-const spacing = [2,14,34,34,14]
+// 02 14 34 34 14
+const spacing = [0.02,0.16,0.5,0.84,0.98]
 
 let l: number, r: number, m: number;
 
@@ -93,4 +93,9 @@ function stepSort(greater: boolean) {
 function placeImg(target:number){
     let newImg = createImg(challenger.src)
     tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
+    const targets = tierContainer.getElementsByClassName("tierMark")
+    for(let x =1; x<6; x++){
+        let space = Math.round(spacing[x-1]*tierContainer.getElementsByTagName("img").length)
+        tierContainer.insertBefore(targets[x],tierContainer.getElementsByTagName("img")[space])
+    }
 }
