@@ -16,6 +16,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 #imageSelection {
@@ -25,6 +26,12 @@ header {
 #tierContainer {
     background-color: rgb(26, 26, 26);
     padding: 10px;
+    width: 60%;
+    margin: auto;
+}
+
+#tierContainer img {
+    width: 10%;
 }
 
 .comparison {
@@ -45,6 +52,11 @@ header {
     justify-content: center;
     align-items: center;
     font-size: 80px;
+    background-color: white;
+}
+
+#rankImages {
+    background-color: rgb(35, 35, 35);
 }
 
 .hidden {
