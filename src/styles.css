@@ -30,8 +30,10 @@ header {
     margin: auto;
 }
 
-#tierContainer img {
-    width: 10%;
+#tierContainer img { 
+    height: 6vw; /* In square image, makes width 10%, using height makes
+                    finding the height of tiers possible, important for 
+                    future changes */
 }
 
 .comparison {

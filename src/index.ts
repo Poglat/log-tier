@@ -13,15 +13,17 @@ const octagon = document.getElementById("octagon")!
 
 const read_files: string[] = []
 // 02 14 34 34 14
-const spacing = [0.02,0.16,0.5,0.84,0.98]
+const spacing = [0.02, 0.16, 0.5, 0.84, 0.98]
+const tierMarkers: HTMLHeadingElement[] = []
 
 let l: number, r: number, m: number;
 
-["S","A","B","C","D","F"].forEach(element => {
-    let newH2=document.createElement("h2")
-    newH2.innerHTML=element
+["S", "A", "B", "C", "D", "F"].forEach(element => {
+    let newH2 = document.createElement("h2")
+    newH2.innerHTML = element
     newH2.classList.add("tierMark")
     newH2.id = element
+    tierMarkers.push(newH2)
     tierContainer.appendChild(newH2)
 }); // 2 14 34 34 14 2 spacing
 
@@ -90,12 +92,13 @@ function stepSort(greater: boolean) {
     incumbent.src = tierContainer.getElementsByTagName('img')[m].src
 }
 
-function placeImg(target:number){
+function placeImg(target: number) {
     let newImg = createImg(challenger.src)
     tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
-    const targets = tierContainer.getElementsByClassName("tierMark")
-    for(let x =1; x<6; x++){
-        let space = Math.round(spacing[x-1]*tierContainer.getElementsByTagName("img").length)
-        tierContainer.insertBefore(targets[x],tierContainer.getElementsByTagName("img")[space])
+
+    // Tier mark placement
+    for (let x = 1; x < 6; x++) {
+        let space = Math.round(spacing[x - 1] * tierContainer.getElementsByTagName("img").length)
+        tierContainer.insertBefore(tierMarkers[x], tierContainer.getElementsByTagName("img")[space])
     }
 }
