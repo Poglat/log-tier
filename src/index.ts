@@ -15,6 +15,14 @@ const read_files: string[] = []
 
 let l: number, r: number, m: number;
 
+["S","A","B","C","D","F"].forEach(element => {
+    let newH2=document.createElement("h2")
+    newH2.innerHTML=element
+    newH2.classList.add("tierMark")
+    newH2.id = element
+    tierContainer.appendChild(newH2)
+}); // 2 14 34 34 14 2 spacing
+
 fileInput.addEventListener('change', startTier)
 challenger.addEventListener('click', (event) => { stepSort(true) })
 incumbent.addEventListener('click', (event) => { stepSort(false) })

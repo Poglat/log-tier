@@ -59,6 +59,35 @@ header {
     background-color: rgb(35, 35, 35);
 }
 
+.tierMark{
+    width: 100%;
+    text-align: center;
+}
+
+#S{
+background-color: red;
+}
+
+#A{
+background-color: orange;
+}
+
+#B{
+    background-color: yellow;
+}
+
+#C{
+    background-color: greenyellow;
+}
+
+#D{
+    background-color: aqua;
+}
+
+#F{
+    background-color: mediumslateblue;
+}
+
 .hidden {
     display: none !important;
 }
