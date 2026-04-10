@@ -56,6 +56,6 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Licenses
 
-All Log Tier source code is licensed underneath the [GPL-3.0 only](LICENSES/gpl-3.0.txt).
+All Log Tier source code is licensed underneath the [GPL-3.0 only](LICENSE).
 
-The visual assets [favicon.ico](src/favicon.ico) and [icon.svg](assets/icon.svg) are marked [CC0 1.0](LICENSES/cc0-1.0.txt)
+The visual assets [favicon.ico](src/favicon.ico), and [icon.svg](assets/icon.svg) are marked [CC0 1.0](LICENSES/cc0-1.0.txt)
