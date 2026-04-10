@@ -13,6 +13,8 @@ const octagon = document.getElementById("octagon")!
 
 const read_files: string[] = []
 
+const spacing = [2,14,34,34,14]
+
 let l: number, r: number, m: number;
 
 ["S","A","B","C","D","F"].forEach(element => {
@@ -62,7 +64,7 @@ function resetSort() {
         return
     }
     l = 0
-    r = tierContainer.childElementCount - 1
+    r = tierContainer.getElementsByTagName('img').length - 1
     challenger.src = read_files.shift()!
     m = (l + r) >> 1
     incumbent.src = tierContainer.getElementsByTagName('img')[m].src
@@ -79,12 +81,16 @@ function stepSort(greater: boolean) {
 
     if (r < l) {
         let target = m + (greater ? 0 : 1)
-        let newImg = createImg(challenger.src)
-        tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
+        placeImg(target)
 
         resetSort()
         return
     }
     m = (l + r) >> 1
     incumbent.src = tierContainer.getElementsByTagName('img')[m].src
+}
+
+function placeImg(target:number){
+    let newImg = createImg(challenger.src)
+    tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
 }
