@@ -30,8 +30,9 @@ header {
     margin: auto;
 }
 
-#tierContainer img { 
-    height: 6vw; /* In square image, makes width 10%, using height makes
+#tierContainer img {
+    height: 6vw;
+    /* In square image, makes width 10%, using height makes
                     finding the height of tiers possible, important for 
                     future changes */
 }
@@ -61,35 +62,75 @@ header {
     background-color: rgb(35, 35, 35);
 }
 
-.tierMark{
+.tierMark {
     width: 100%;
     text-align: center;
 }
 
-#S{
-background-color: red;
+#S {
+    background-color: red;
 }
 
-#A{
-background-color: orange;
+#A {
+    background-color: orange;
 }
 
-#B{
+#B {
     background-color: yellow;
 }
 
-#C{
+#C {
     background-color: greenyellow;
 }
 
-#D{
+#D {
     background-color: aqua;
 }
 
-#F{
+#F {
     background-color: mediumslateblue;
 }
 
 .hidden {
     display: none !important;
+}
+
+#tableContainer {
+    display: grid;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    background-color: wheat;
+    width: 45%;
+    padding: 15px;
+}
+
+.rowContainer {
+    display: flex;
+    width: 100%;
+}
+
+.rowContainer div {
+    display: flex;
+    border-style: solid;
+    border-right: 0px;
+    border-bottom: 0;
+    padding: 5px;
+}
+
+.rowContainer:last-child {
+    border-bottom: solid;
+}
+
+.rowName {
+    flex: 5
+}
+
+.rowColor {
+    flex: 3
+}
+
+div.rowSize {
+    border-right: solid;
+    flex: 2
 }
