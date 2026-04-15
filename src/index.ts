@@ -10,6 +10,7 @@ const tierContainer = document.getElementById("tierContainer")!
 const challenger = document.getElementById("challenger")! as HTMLImageElement
 const incumbent = document.getElementById("incumbent")! as HTMLImageElement
 const octagon = document.getElementById("octagon")!
+const tableContainer = document.getElementById("tableContainer")!
 
 const read_files: string[] = []
 const spacing = getTierSpacing(6)
@@ -24,19 +25,20 @@ challenger.addEventListener('click', () => { stepSort(true) })
 incumbent.addEventListener('click', () => { stepSort(false) })
 
 
-function resetMarks(){
+function resetMarks() {
     tierMarkers.forEach(element => {
         tierContainer.removeChild(element)
     });
-    [["S","red"], ["A","orange"], ["B","yellow"], ["C","green"], ["D","aqua"], ["F","purple"]].forEach(element => {
-    let newH2 = document.createElement("h2")
-    newH2.innerHTML = element[0]
-    newH2.classList.add("tierMark")
-    newH2.classList.add(element[1])
-    tierMarkers.push(newH2)
-    tierContainer.appendChild(newH2)
-    placeMarks()
-});
+    [["S", "red"], ["A", "orange"], ["B", "yellow"], ["C", "green"], ["D", "aqua"], ["F", "purple"]].forEach(element => {
+        let newH2 = document.createElement("h2")
+        newH2.innerHTML = element[0]
+        newH2.classList.add("tierMark")
+        newH2.classList.add(element[1])
+        tierMarkers.push(newH2)
+        tierContainer.appendChild(newH2)
+        placeMarks()
+        addTierSetting(element[0], -1)
+    });
 }
 
 
@@ -110,7 +112,7 @@ function placeImg(target: number) {
 }
 
 
-function placeMarks(){
+function placeMarks() {
     // Tier mark placement
     for (let x = 1; x < tierMarkers.length; x++) {
         let space = Math.round(spacing[x - 1] * tierContainer.getElementsByTagName("img").length)
@@ -183,13 +185,42 @@ function getTierSize(tiers: number): number[] {
 }
 
 
-function getTierSpacing(tiers:number): number[] {
+function getTierSpacing(tiers: number): number[] {
     const base = getTierSize(tiers)
     base.pop() // Last value is always 1, never used
-    let previous=0;
-    for (let x=0; x<base.length; x++){
-        base[x] = previous+base[x]
+    let previous = 0;
+    for (let x = 0; x < base.length; x++) {
+        base[x] = previous + base[x]
         previous = base[x]
     }
     return base
+}
+
+
+function addTierSetting(rowName: string, tierSize: number) {
+    let settingRow = document.createElement("div")
+    settingRow.className = "rowContainer";
+    settingRow.innerHTML = `
+    <div class="rowName">${rowName}</div>
+    <select class="rowColor">
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="aqua">Aqua</option>
+        <option value="blue">Blue</option>
+        <option value="purple">Purple</option>
+        <option value="indigo">Indigo</option>
+        <option value="gray">Gray</option>
+        <option value="white">White</option>
+    </select>
+    <div class="rowSize">${tierSize}</div>
+`
+    settingRow.getElementsByTagName("select")[0].addEventListener("change", (event => {
+        const target = event.target as HTMLSelectElement;
+        target.className = 'rowColor'
+        target.classList.add(target.value)
+    }))
+
+    tableContainer.appendChild(settingRow)
 }
