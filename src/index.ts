@@ -131,15 +131,19 @@ function getSpread(sx: number) {
 }
 
 
-
-function getTierSize(tiers: number) {
+function getTierSize(tiers: number): number[] {
     const sx_range = 3
     // Greater range means accurately representing normal distribution, largely empty to infinity, with massive central spike
     // Lower range means more equal spread, less truly accurate, more visually accurate to bell curve 
 
     if (tiers % 2 == 1) {
-        console.log("uneven, FIXME")
-        return
+        // Create evens twice as large, then shrink to even
+        const even_size = getTierSize(tiers * 2)
+        const odd_sizes = []
+        for (let x = 0; x < even_size.length; x += 2) {
+            odd_sizes.push(even_size[x] + even_size[x + 1])
+        }
+        return odd_sizes
     }
     tiers /= 2
     let previous = 0
@@ -161,8 +165,8 @@ function getTierSize(tiers: number) {
     // Normalize tiers
     for (let x = 0; x < sizes.length; x++) {
         sizes[x] = sizes[x] / total
-        console.log(sizes[x])
     }
+    return sizes;
 }
 
-getTierSize(6)
+console.log(getTierSize(3))
