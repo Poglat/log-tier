@@ -17,18 +17,27 @@ const tierMarkers: HTMLHeadingElement[] = []
 
 let l: number, r: number, m: number;
 
-[["S","red"], ["A","orange"], ["B","yellow"], ["C","green"], ["D","aqua"], ["F","purple"]].forEach(element => {
+resetMarks()
+
+fileInput.addEventListener('change', startTier)
+challenger.addEventListener('click', (event) => { stepSort(true) })
+incumbent.addEventListener('click', (event) => { stepSort(false) })
+
+
+function resetMarks(){
+    tierMarkers.forEach(element => {
+        tierContainer.removeChild(element)
+    });
+    [["S","red"], ["A","orange"], ["B","yellow"], ["C","green"], ["D","aqua"], ["F","purple"]].forEach(element => {
     let newH2 = document.createElement("h2")
     newH2.innerHTML = element[0]
     newH2.classList.add("tierMark")
     newH2.classList.add(element[1])
     tierMarkers.push(newH2)
     tierContainer.appendChild(newH2)
+    placeMarks()
 });
-
-fileInput.addEventListener('change', startTier)
-challenger.addEventListener('click', (event) => { stepSort(true) })
-incumbent.addEventListener('click', (event) => { stepSort(false) })
+}
 
 
 function startTier() {
@@ -97,8 +106,13 @@ function placeImg(target: number) {
     let newImg = createImg(challenger.src)
     tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
 
+    placeMarks()
+}
+
+
+function placeMarks(){
     // Tier mark placement
-    for (let x = 1; x < 6; x++) {
+    for (let x = 1; x < tierMarkers.length; x++) {
         let space = Math.round(spacing[x - 1] * tierContainer.getElementsByTagName("img").length)
         tierContainer.insertBefore(tierMarkers[x], tierContainer.getElementsByTagName("img")[space])
     }
