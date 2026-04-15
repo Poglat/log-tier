@@ -231,4 +231,11 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
 function mcColorChange(target: HTMLSelectElement) {
     target.className = 'rowColor'
     target.classList.add(target.value)
+
+    const parent = target.parentElement as HTMLDivElement
+    const index = Array.from(tableContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
+
+    const markTarget = tierContainer.getElementsByClassName("tierMark")[index]
+    markTarget.className = "tierMark"
+    markTarget.classList.add(target.value)
 }
