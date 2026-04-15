@@ -60,6 +60,7 @@ function createImg(src: string): HTMLImageElement {
     return img
 }
 
+
 function resetSort() {
     if (!read_files.length) {
         octagon.classList.add("hidden")
@@ -92,6 +93,7 @@ function stepSort(greater: boolean) {
     incumbent.src = tierContainer.getElementsByTagName('img')[m].src
 }
 
+
 function placeImg(target: number) {
     let newImg = createImg(challenger.src)
     tierContainer.insertBefore(newImg, tierContainer.getElementsByTagName('img')[target])
@@ -101,4 +103,29 @@ function placeImg(target: number) {
         let space = Math.round(spacing[x - 1] * tierContainer.getElementsByTagName("img").length)
         tierContainer.insertBefore(tierMarkers[x], tierContainer.getElementsByTagName("img")[space])
     }
+}
+
+
+function erfApprox(x: number) { // necessary for normal distribution calc
+    let val = 1;
+    if (x < 0) { // approx only works with x>=0
+        val *= -1
+        x *= -1
+    }
+    let t = 1 / (1 + 0.3275911 * x)
+    x = (
+        1 - (
+            0.254829592 * t +
+            -0.284496736 * t ** 2 +
+            1.421413741 * t ** 3 +
+            -1.453152027 * t ** 4 +
+            1.061405429 * t ** 5
+        ) * Math.E ** -(x ** 2)
+    )
+    return val * x // fix sign
+}
+
+
+function getSpread(sx: number) {
+    return erfApprox(sx / Math.sqrt(2))
 }
