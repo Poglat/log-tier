@@ -129,3 +129,40 @@ function erfApprox(x: number) { // necessary for normal distribution calc
 function getSpread(sx: number) {
     return erfApprox(sx / Math.sqrt(2))
 }
+
+
+
+function getTierSize(tiers: number) {
+    const sx_range = 3
+    // Greater range means accurately representing normal distribution, largely empty to infinity, with massive central spike
+    // Lower range means more equal spread, less truly accurate, more visually accurate to bell curve 
+
+    if (tiers % 2 == 1) {
+        console.log("uneven, FIXME")
+        return
+    }
+    tiers /= 2
+    let previous = 0
+    let currentRange
+    let isolated
+    const sizes = []
+    let total = 0
+    for (let x = 1; x < (tiers + 1); x++) {
+        currentRange = getSpread((x / tiers) * sx_range)
+        isolated = (currentRange - previous) / 2
+
+        previous = currentRange
+        total += isolated
+
+        sizes.push(isolated)
+        sizes.unshift(isolated)
+    }
+    total *= 2
+    // Normalize tiers
+    for (let x = 0; x < sizes.length; x++) {
+        sizes[x] = sizes[x] / total
+        console.log(sizes[x])
+    }
+}
+
+getTierSize(6)
