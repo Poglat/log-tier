@@ -67,28 +67,44 @@ header {
     text-align: center;
 }
 
-#S {
+.red {
     background-color: red;
 }
 
-#A {
+.orange {
     background-color: orange;
 }
 
-#B {
+.yellow {
     background-color: yellow;
 }
 
-#C {
+.green {
     background-color: greenyellow;
 }
 
-#D {
+.aqua {
     background-color: aqua;
 }
 
-#F {
+.blue {
+    background-color: blue;
+}
+
+.purple {
     background-color: mediumslateblue;
+}
+
+.indigo {
+    background-color: indigo;
+}
+
+.gray {
+    background-color: rgb(67, 67, 67);
+}
+
+.white {
+    background-color: rgb(225, 225, 225);
 }
 
 .hidden {

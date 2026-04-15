@@ -17,11 +17,11 @@ const tierMarkers: HTMLHeadingElement[] = []
 
 let l: number, r: number, m: number;
 
-["S", "A", "B", "C", "D", "F"].forEach(element => {
+[["S","red"], ["A","orange"], ["B","yellow"], ["C","green"], ["D","aqua"], ["F","purple"]].forEach(element => {
     let newH2 = document.createElement("h2")
-    newH2.innerHTML = element
+    newH2.innerHTML = element[0]
     newH2.classList.add("tierMark")
-    newH2.id = element
+    newH2.classList.add(element[1])
     tierMarkers.push(newH2)
     tierContainer.appendChild(newH2)
 });
