@@ -216,12 +216,14 @@ function addTierSetting(rowName: string, tierSize: number) {
     </select>
     <div class="rowSize">${tierSize}</div>
 `
-    settingRow.getElementsByTagName("select")[0].addEventListener("change", (event => {
+    const mcColor = settingRow.getElementsByTagName("select")[0]
+    mcColor.addEventListener("change", (event => {
         const target = event.target as HTMLSelectElement;
         mcColorChange(target)
     }))
 
     tableContainer.appendChild(settingRow)
+    mcColorChange(mcColor)
 }
 
 
