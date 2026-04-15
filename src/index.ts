@@ -169,4 +169,16 @@ function getTierSize(tiers: number): number[] {
     return sizes;
 }
 
-console.log(getTierSize(3))
+
+function getTierSpacing(tiers:number): number[] {
+    const base = getTierSize(tiers)
+    base.pop() // Last value is always 1, never used
+    let previous=0;
+    for (let x=0; x<base.length; x++){
+        base[x] = previous+base[x]
+        previous = base[x]
+    }
+    return base
+}
+
+console.log(getTierSpacing(6))
