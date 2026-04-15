@@ -12,8 +12,7 @@ const incumbent = document.getElementById("incumbent")! as HTMLImageElement
 const octagon = document.getElementById("octagon")!
 
 const read_files: string[] = []
-// 02 14 34 34 14
-const spacing = [0.02, 0.16, 0.5, 0.84, 0.98]
+const spacing = getTierSpacing(6)
 const tierMarkers: HTMLHeadingElement[] = []
 
 let l: number, r: number, m: number;
@@ -25,7 +24,7 @@ let l: number, r: number, m: number;
     newH2.id = element
     tierMarkers.push(newH2)
     tierContainer.appendChild(newH2)
-}); // 2 14 34 34 14 2 spacing
+});
 
 fileInput.addEventListener('change', startTier)
 challenger.addEventListener('click', (event) => { stepSort(true) })
@@ -180,5 +179,3 @@ function getTierSpacing(tiers:number): number[] {
     }
     return base
 }
-
-console.log(getTierSpacing(6))
