@@ -37,7 +37,7 @@ function resetMarks() {
         tierMarkers.push(newH2)
         tierContainer.appendChild(newH2)
         placeMarks()
-        addTierSetting(element[0], -1)
+        addTierSetting(element[0], element[1], -1)
     });
 }
 
@@ -197,7 +197,7 @@ function getTierSpacing(tiers: number): number[] {
 }
 
 
-function addTierSetting(rowName: string, tierSize: number) {
+function addTierSetting(rowName: string, color: string, tierSize: number) {
     let settingRow = document.createElement("div")
     settingRow.className = "rowContainer";
     settingRow.innerHTML = `
@@ -217,6 +217,7 @@ function addTierSetting(rowName: string, tierSize: number) {
     <div class="rowSize">${tierSize}</div>
 `
     const mcColor = settingRow.getElementsByTagName("select")[0]
+    mcColor.value = color
     mcColor.addEventListener("change", (event => {
         const target = event.target as HTMLSelectElement;
         mcColorChange(target)
