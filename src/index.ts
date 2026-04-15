@@ -20,8 +20,8 @@ let l: number, r: number, m: number;
 resetMarks()
 
 fileInput.addEventListener('change', startTier)
-challenger.addEventListener('click', (event) => { stepSort(true) })
-incumbent.addEventListener('click', (event) => { stepSort(false) })
+challenger.addEventListener('click', () => { stepSort(true) })
+incumbent.addEventListener('click', () => { stepSort(false) })
 
 
 function resetMarks(){
