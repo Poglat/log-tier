@@ -18,6 +18,8 @@ const tierMarkers: HTMLHeadingElement[] = []
 
 let l: number, r: number, m: number;
 
+const DefaultTiers = [["S", "red"], ["A", "orange"], ["B", "yellow"], ["C", "green"], ["D", "aqua"], ["F", "purple"]]
+
 resetMarks()
 
 fileInput.addEventListener('change', startTier)
@@ -26,10 +28,12 @@ incumbent.addEventListener('click', () => { stepSort(false) })
 
 
 function resetMarks() {
-    tierMarkers.forEach(element => {
+    for (let x = 0; x < tierMarkers.length; x++) {
+        let element = tierMarkers[x]
         tierContainer.removeChild(element)
-    });
-    [["S", "red"], ["A", "orange"], ["B", "yellow"], ["C", "green"], ["D", "aqua"], ["F", "purple"]].forEach(element => {
+    };
+    for (let x = 0; x < DefaultTiers.length; x++) {
+        let element = DefaultTiers[x]
         let newH2 = document.createElement("h2")
         newH2.innerHTML = element[0]
         newH2.classList.add("tierMark")
@@ -37,8 +41,8 @@ function resetMarks() {
         tierMarkers.push(newH2)
         tierContainer.appendChild(newH2)
         placeMarks()
-        addTierSetting(element[0], element[1], -1)
-    });
+        addTierSetting(element[0], element[1], spacing[x])
+    };
 }
 
 
@@ -214,7 +218,7 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
         <option value="gray">Gray</option>
         <option value="white">White</option>
     </select>
-    <div class="rowSize">${tierSize}</div>
+    <input class="rowSize"></input>
 `
     const title = settingRow.getElementsByTagName("input")[0]
     title.value = rowName
@@ -233,6 +237,9 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
         const target = event.target as HTMLSelectElement
         mcColorChange(target)
     }))
+
+    const size = settingRow.getElementsByTagName("input")[1]
+    size.value = tierSize.toString();
 
     tableContainer.appendChild(settingRow)
     mcColorChange(mcColor)
