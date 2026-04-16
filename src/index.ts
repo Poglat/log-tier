@@ -13,7 +13,7 @@ const octagon = document.getElementById("octagon")!
 const tableContainer = document.getElementById("tableContainer")!
 
 const read_files: string[] = []
-const spacing = getTierSpacing(6)
+const spacing = getTierSize(6)
 const tierMarkers: HTMLHeadingElement[] = []
 
 let l: number, r: number, m: number;
@@ -118,8 +118,10 @@ function placeImg(target: number) {
 
 function placeMarks() {
     // Tier mark placement
+    let percentagePosition = 0
     for (let x = 1; x < tierMarkers.length; x++) {
-        let space = Math.round(spacing[x - 1] * tierContainer.getElementsByTagName("img").length)
+        percentagePosition += spacing[x - 1]
+        let space = Math.round(percentagePosition * tierContainer.getElementsByTagName("img").length)
         tierContainer.insertBefore(tierMarkers[x], tierContainer.getElementsByTagName("img")[space])
     }
 }
@@ -186,17 +188,6 @@ function getTierSize(tiers: number): number[] {
         sizes[x] = sizes[x] / total
     }
     return sizes;
-}
-
-
-function getTierSpacing(tiers: number): number[] {
-    const base = getTierSize(tiers)
-    let previous = 0;
-    for (let x = 0; x < base.length; x++) {
-        base[x] = previous + base[x]
-        previous = base[x]
-    }
-    return base
 }
 
 
