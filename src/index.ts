@@ -201,7 +201,7 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
     let settingRow = document.createElement("div")
     settingRow.className = "rowContainer";
     settingRow.innerHTML = `
-    <div class="rowName">${rowName}</div>
+    <input class="rowName"></input>
     <select class="rowColor">
         <option value="red">Red</option>
         <option value="orange">Orange</option>
@@ -216,6 +216,8 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
     </select>
     <div class="rowSize">${tierSize}</div>
 `
+    const title = settingRow.getElementsByTagName("input")[0]
+    title.value = rowName
     const mcColor = settingRow.getElementsByTagName("select")[0]
     mcColor.value = color
     mcColor.addEventListener("change", (event => {
