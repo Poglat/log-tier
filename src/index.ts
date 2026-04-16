@@ -117,10 +117,13 @@ function placeImg(target: number) {
 
 
 function placeMarks() {
-    // Tier mark placement
+    let total = 0
+    spacing.forEach(element => {
+        total += element
+    });
     let percentagePosition = 0
     for (let x = 1; x < tierMarkers.length; x++) {
-        percentagePosition += spacing[x - 1]
+        percentagePosition += (spacing[x - 1]) / total
         let space = Math.round(percentagePosition * tierContainer.getElementsByTagName("img").length)
         tierContainer.insertBefore(tierMarkers[x], tierContainer.getElementsByTagName("img")[space])
     }
