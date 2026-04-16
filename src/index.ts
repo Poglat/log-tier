@@ -216,7 +216,7 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
     const title = settingRow.getElementsByTagName("input")[0]
     title.value = rowName
     title.addEventListener("input", (event) => {
-        const target = event.target as HTMLSelectElement
+        const target = event.target as HTMLInputElement
         const parent = target.parentElement as HTMLDivElement
         const index = Array.from(tableContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
 
@@ -233,6 +233,14 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
 
     const size = settingRow.getElementsByTagName("input")[1]
     size.value = tierSize.toString();
+    size.addEventListener("input", (event=>{
+        const target = event.target as HTMLInputElement
+        const parent = target.parentElement as HTMLDivElement
+        const index = Array.from(tableContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
+
+        spacing[index] = parseFloat(target.value)
+        placeMarks()
+    }))
 
     tableContainer.appendChild(settingRow)
     mcColorChange(mcColor)
