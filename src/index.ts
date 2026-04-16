@@ -233,11 +233,12 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
 
     const size = settingRow.getElementsByTagName("input")[1]
     size.value = tierSize.toString();
-    size.addEventListener("input", (event=>{
+    size.addEventListener("input", (event => {
         const target = event.target as HTMLInputElement
         const parent = target.parentElement as HTMLDivElement
         const index = Array.from(tableContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
 
+        target.value = enforceNumber(target.value)
         spacing[index] = parseFloat(target.value)
         placeMarks()
     }))
@@ -257,4 +258,14 @@ function mcColorChange(target: HTMLSelectElement) {
     const markTarget = tierContainer.getElementsByClassName("tierMark")[index]
     markTarget.className = "tierMark"
     markTarget.classList.add(target.value)
+}
+
+
+function enforceNumber(sizeValue: string): string {
+    const regex = /^[0-9]*\.?[0-9]*$/
+
+    if (!regex.test(sizeValue)) {
+        sizeValue = sizeValue.slice(0, -1)
+    }
+    return sizeValue;
 }
