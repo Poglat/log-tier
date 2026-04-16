@@ -218,10 +218,19 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
 `
     const title = settingRow.getElementsByTagName("input")[0]
     title.value = rowName
+    title.addEventListener("input", (event) => {
+        const target = event.target as HTMLSelectElement
+        const parent = target.parentElement as HTMLDivElement
+        const index = Array.from(tableContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
+
+        const markTarget = tierContainer.getElementsByClassName("tierMark")[index]
+        markTarget.innerHTML = target.value
+    })
+
     const mcColor = settingRow.getElementsByTagName("select")[0]
     mcColor.value = color
     mcColor.addEventListener("change", (event => {
-        const target = event.target as HTMLSelectElement;
+        const target = event.target as HTMLSelectElement
         mcColorChange(target)
     }))
 
