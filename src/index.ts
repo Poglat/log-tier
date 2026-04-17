@@ -28,8 +28,15 @@ incumbent.addEventListener('click', () => { stepSort(false) })
 
 
 function resetMarks() {
+    while (spacing.length > 0) {
+        spacing.pop()
+    }
+    getTierSize(6).forEach(element => {
+        spacing.push(element)
+    });
+
     for (let x = 0; x < tierMarkers.length; x++) {
-        let element = tierMarkers[x]
+        let element = tierMarkers[0]
         tierContainer.removeChild(element)
     };
     for (let x = 0; x < DefaultTiers.length; x++) {
@@ -39,8 +46,8 @@ function resetMarks() {
         newH2.classList.add("tierMark")
         newH2.classList.add(element[1])
         tierMarkers.push(newH2)
-        tierContainer.appendChild(newH2)
-        placeMarks()
+        tierContainer.insertBefore(newH2, tierContainer.children[0]) // all placed in s position, non s tiers positioned later
+        placeMarks() // FIXME: should be run outside of the loop
         addTierSetting(element[0], element[1], spacing[x])
     };
 }
@@ -268,4 +275,23 @@ function enforceNumber(sizeValue: string): string {
         sizeValue = sizeValue.slice(0, -1)
     }
     return sizeValue;
+}
+
+
+function resetTiers() {
+    const rowChildren = tableContainer.getElementsByClassName("rowContainer")
+    while (rowChildren.length > 1) {
+        tableContainer.removeChild(rowChildren[1])
+    }
+
+    const headerChildren = tierContainer.getElementsByClassName("tierMark")
+    while (headerChildren.length > 0) {
+        tierContainer.removeChild(headerChildren[0])
+    }
+
+    while (tierMarkers.length > 0) {
+        tierMarkers.pop()
+    }
+
+    resetMarks()
 }
