@@ -10,7 +10,7 @@ const tierContainer = document.getElementById("tierContainer")!
 const challenger = document.getElementById("challenger")! as HTMLImageElement
 const incumbent = document.getElementById("incumbent")! as HTMLImageElement
 const octagon = document.getElementById("octagon")!
-const rowContainer = document.getElementById("rowContainer")!
+const tableContainer = document.getElementById("tableContainer")!
 
 const read_files: string[] = []
 const spacing = getTierSize(6)
@@ -218,7 +218,7 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
     title.addEventListener("input", (event) => {
         const target = event.target as HTMLInputElement
         const parent = target.parentElement as HTMLDivElement
-        const index = Array.from(rowContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
+        const index = Array.from(tableContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
 
         const markTarget = tierContainer.getElementsByClassName("tierMark")[index]
         markTarget.innerHTML = target.value
@@ -236,14 +236,14 @@ function addTierSetting(rowName: string, color: string, tierSize: number) {
     size.addEventListener("input", (event => {
         const target = event.target as HTMLInputElement
         const parent = target.parentElement as HTMLDivElement
-        const index = Array.from(rowContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
+        const index = Array.from(tableContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
 
         target.value = enforceNumber(target.value)
         spacing[index] = parseFloat(target.value)
         placeMarks()
     }))
 
-    rowContainer.appendChild(settingRow)
+    tableContainer.appendChild(settingRow)
     mcColorChange(mcColor)
 }
 
@@ -253,7 +253,7 @@ function mcColorChange(target: HTMLSelectElement) {
     target.classList.add(target.value)
 
     const parent = target.parentElement as HTMLDivElement
-    const index = Array.from(rowContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
+    const index = Array.from(tableContainer.getElementsByClassName("rowContainer")).indexOf(parent) - 1
 
     const markTarget = tierContainer.getElementsByClassName("tierMark")[index]
     markTarget.className = "tierMark"
