@@ -28,13 +28,6 @@ incumbent.addEventListener('click', () => { stepSort(false) })
 
 
 function resetMarks() {
-    while (spacing.length > 0) {
-        spacing.pop()
-    }
-    getTierSize(6).forEach(element => {
-        spacing.push(element)
-    });
-
     for (let x = 0; x < tierMarkers.length; x++) {
         let element = tierMarkers[0]
         tierContainer.removeChild(element)
@@ -50,6 +43,7 @@ function resetMarks() {
         placeMarks() // FIXME: should be run outside of the loop
         addTierSetting(element[0], element[1], spacing[x])
     };
+    setTierSize(6)
 }
 
 
@@ -201,6 +195,22 @@ function getTierSize(tiers: number): number[] {
 }
 
 
+function setTierSize(tiers: number) {
+    while (spacing.length > 0) {
+        spacing.pop()
+    }
+
+    const newSizes = getTierSize(tiers)
+
+    const settingInput = tableContainer.getElementsByClassName("rowContainer")
+    for (let x = 0; x < newSizes.length; x++) {
+        spacing.push(newSizes[x])
+        let target = settingInput[x + 1].getElementsByTagName("input")[1]
+        target.value = newSizes[x].toString()
+    }
+}
+
+
 function addTierSetting(rowName: string, color: string, tierSize: number) {
     let settingRow = document.createElement("div")
     settingRow.className = "rowContainer";
@@ -298,18 +308,7 @@ function resetTiers() {
 
 
 function makeCurve() {
-    while (spacing.length > 0) {
-        spacing.pop()
-    }
     const length = tierMarkers.length
-
-    const newSizes = getTierSize(length)
-    const settingInput = tableContainer.getElementsByClassName("rowContainer")
-
-    for (let x = 0; x < length; x++) {
-        spacing.push(newSizes[x])
-        let target = settingInput[x + 1].getElementsByTagName("input")[1]
-        target.value = newSizes[x].toString()
-    }
+    setTierSize(length)
     placeMarks()
 }
