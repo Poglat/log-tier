@@ -295,3 +295,21 @@ function resetTiers() {
 
     resetMarks()
 }
+
+
+function makeCurve() {
+    while (spacing.length > 0) {
+        spacing.pop()
+    }
+    const length = tierMarkers.length
+
+    const newSizes = getTierSize(length)
+    const settingInput = tableContainer.getElementsByClassName("rowContainer")
+
+    for (let x = 0; x < length; x++) {
+        spacing.push(newSizes[x])
+        let target = settingInput[x + 1].getElementsByTagName("input")[1]
+        target.value = newSizes[x].toString()
+    }
+    placeMarks()
+}
