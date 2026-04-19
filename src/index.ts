@@ -34,7 +34,7 @@ function resetMarks() {
     };
     for (let x = 0; x < DefaultTiers.length; x++) {
         let element = DefaultTiers[x]
-        addTier(element,spacing[x])
+        addTier(element, spacing[x])
     };
     setTierSize(6)
 }
@@ -52,6 +52,17 @@ function startTier() {
     for (let x = 0; x < fileInput.files.length; x++) {
         let url = URL.createObjectURL(fileInput.files[x])
         read_files.push(url)
+    }
+
+    const shuffleIn = document.getElementById("shuffleIn") as HTMLInputElement
+
+    if (shuffleIn.checked) {
+        for (let i = read_files.length - 1; i > 0; i--) {
+            let rand = Math.floor(Math.random() * (i + 1))
+            let b = read_files[i]
+            read_files[i] = read_files[rand]
+            read_files[rand] = b
+        }
     }
     // For visual consistency, start the list with the 2nd file
     // >> in list a,b,c this displays [a] vs [b]
@@ -323,13 +334,12 @@ function removeTier() {
 }
 
 
-function addTier(nameColor:string[]=["new","white"],spacing:number=0){
-        let newH2 = document.createElement("h2")
-        newH2.innerHTML = nameColor[0]
-        newH2.classList.add("tierMark")
-        newH2.classList.add(nameColor[1])
-        tierMarkers.push(newH2)
-        tierContainer.insertBefore(newH2, tierContainer.children[0]) // all placed in s position, non s tiers positioned later
-        placeMarks() // FIXME: should be run outside of the loop
-        addTierSetting(nameColor[0], nameColor[1], spacing)
+function addTier(nameColor: string[] = ["new", "white"], spacing: number = 0) {
+    let newH2 = document.createElement("h2")
+    newH2.innerHTML = nameColor[0]
+    newH2.classList.add("tierMark")
+    tierMarkers.push(newH2)
+    tierContainer.insertBefore(newH2, tierContainer.children[0]) // all placed in s position, non s tiers positioned later
+    placeMarks() // FIXME: should be run outside of the loop
+    addTierSetting(nameColor[0], nameColor[1], spacing)
 }
