@@ -283,12 +283,24 @@ function mcColorChange(target: HTMLSelectElement) {
 
 
 function enforceNumber(sizeValue: string): string {
-    const regex = /^[0-9]*\.?[0-9]*$/
-
-    if (!regex.test(sizeValue)) {
-        sizeValue = sizeValue.slice(0, -1)
+    let outString = ""
+    let pointSeen = false
+    for (let x = 0; x < sizeValue.length; x++) {
+        let testChar = sizeValue[x]
+        if (testChar == ".") {
+            if (!pointSeen) {
+                pointSeen = true
+            }
+            else {
+                continue
+            }
+        }
+        else if (Number.isNaN(parseInt(testChar))) {
+            continue
+        }
+        outString += testChar
     }
-    return sizeValue;
+    return outString
 }
 
 
