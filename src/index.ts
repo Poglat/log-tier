@@ -312,3 +312,18 @@ function makeCurve() {
     setTierSize(length)
     placeMarks()
 }
+
+
+function removeTier() {
+    const settingsRows = tableContainer.getElementsByClassName("rowContainer")
+
+    if (settingsRows.length <= 1) {
+        return
+    }
+    spacing.pop()
+    tableContainer.removeChild(settingsRows[settingsRows.length - 1])
+
+    tierContainer.removeChild(tierMarkers[tierMarkers.length - 1])
+    tierMarkers.pop()
+    placeMarks()
+}
