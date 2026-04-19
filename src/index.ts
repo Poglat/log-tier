@@ -34,14 +34,7 @@ function resetMarks() {
     };
     for (let x = 0; x < DefaultTiers.length; x++) {
         let element = DefaultTiers[x]
-        let newH2 = document.createElement("h2")
-        newH2.innerHTML = element[0]
-        newH2.classList.add("tierMark")
-        newH2.classList.add(element[1])
-        tierMarkers.push(newH2)
-        tierContainer.insertBefore(newH2, tierContainer.children[0]) // all placed in s position, non s tiers positioned later
-        placeMarks() // FIXME: should be run outside of the loop
-        addTierSetting(element[0], element[1], spacing[x])
+        addTier(element,spacing[x])
     };
     setTierSize(6)
 }
@@ -304,6 +297,7 @@ function resetTiers() {
     }
 
     resetMarks()
+    placeMarks()
 }
 
 
@@ -326,4 +320,16 @@ function removeTier() {
     tierContainer.removeChild(tierMarkers[tierMarkers.length - 1])
     tierMarkers.pop()
     placeMarks()
+}
+
+
+function addTier(nameColor:string[]=["new","white"],spacing:number=0){
+        let newH2 = document.createElement("h2")
+        newH2.innerHTML = nameColor[0]
+        newH2.classList.add("tierMark")
+        newH2.classList.add(nameColor[1])
+        tierMarkers.push(newH2)
+        tierContainer.insertBefore(newH2, tierContainer.children[0]) // all placed in s position, non s tiers positioned later
+        placeMarks() // FIXME: should be run outside of the loop
+        addTierSetting(nameColor[0], nameColor[1], spacing)
 }
